@@ -11,11 +11,22 @@ export class AppComponent implements AfterViewInit {
   cameraPhoto: HTMLCanvasElement;
   photo: string;
 
+  setCamera(): void {
+    this.cameraOutput = document.querySelector('#camera');
+  }
+
   startCamera(): void {
+    this.setCamera();
+    
     navigator.mediaDevices
       .getUserMedia({ video: true, audio: false })
-      .then((output) => (this.cameraOutput.srcObject = output))
+      .then((output) => {
+        this.cameraOutput.srcObject = output;
+        this.log(output)
+      })
       .catch((error) => console.error(error));
+
+    this.log(this.cameraOutput)
   }
 
   takePhoto(): void {
@@ -26,8 +37,12 @@ export class AppComponent implements AfterViewInit {
     this.photo = this.cameraPhoto.toDataURL('image/jpeg');
   }
 
-  ngAfterViewInit(): void {
-    this.cameraOutput = document.querySelector('#camera');
+  ngAfterViewInit(): void { 
     this.cameraPhoto = document.querySelector('#photo-taken');
+    console.log("ready!")
+  }
+
+  log(data): void {
+    console.log(data)
   }
 }

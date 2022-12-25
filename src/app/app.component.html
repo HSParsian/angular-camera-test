@@ -1,11 +1,11 @@
 <div class="view">
   <div class="camera-display">
-    <video id="camera"></video>
+    <video id="camera" style="width 300px; height: 300px;"></video>
 
     <canvas id="photo-taken"></canvas>
   </div>
 
   <button (click)="startCamera()">start camera</button>
 
-  <button>take photo</button>
+  <button (click)="takePhoto()">take photo</button>
 </div>
